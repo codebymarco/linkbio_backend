@@ -14,9 +14,12 @@ const getProject = async (req, res) => {
     if (!projects) {
       throw Error("no portfolio");
     }
+    if (!projects.active) {
+      throw Error("no portfolio");
+    }
     let views = parseInt(projects.views) + 1;
     const views2 = await Project.findByIdAndUpdate(projects._id, { views });
-    console.log(views2)
+    console.log(views2);
     res.status(200).json(projects);
   } catch (error) {
     res.status(400).json({ error: error.message });
