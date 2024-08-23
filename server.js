@@ -21,6 +21,11 @@ app.use("/portfolio", publicRoutes);
 app.use("/api/users", userRoutes);
 app.use("/files", express.static("files"));
 
+app.get('/', (req, res) => {
+  console.log('Server hit');
+  res.send('Server hit');
+});
+
 mongoose
   .connect(
     "mongodb+srv://miguelmarcoramcharan:miguelmarcoramcharan@marcoramcharan.ji59fop.mongodb.net/linkbio?retryWrites=true&w=majority&appName=MARCORAMCHARAN"
