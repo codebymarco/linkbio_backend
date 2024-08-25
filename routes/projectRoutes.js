@@ -3,9 +3,7 @@ const router = express.Router();
 const {
   deleteProject,
   getProject,
-  getProjects,
-  updateProject,
-  deleteAllProjects,
+  updateProject
 } = require("../controllers/projectController");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
@@ -15,7 +13,6 @@ const Portfolio = require("../models/portfolioModel");
 const Auth = require("../middlewear/requireAuth");
 router.use(Auth);
 
-// todo: this is the photo upload logic
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "files");
@@ -26,7 +23,7 @@ const storage = multer.diskStorage({
 });
 let upload = multer({ storage });
 
-// todo: create the portoflio with a photo
+// Create LinkBio With Photo
 router.post("/photo", upload.single("photo"), async (req, res) => {
   const user_id = req.user._id;
   const url = req.protocol + "://" + req.get("host");
@@ -53,8 +50,7 @@ router.post("/photo", upload.single("photo"), async (req, res) => {
   }
 });
 
-// todo: create the portoflio without a photo
-// we wont use this now unless we want user to create multiple portoflios
+// Create LinkBio Without Photo
 router.post("/", async (req, res) => {
   const user_id = req.user._id;
   const { name, arr, description, repo, demo, type, technologies } = req.body;
@@ -77,15 +73,13 @@ router.post("/", async (req, res) => {
   }
 });
 
-// todo: get portfolio
+// Get LinkBio
 router.get("/:user_id", getProject);
 
-// todo: increment views
-
-// todo: edit portfolio
+// Edit LinkBio
 router.put("/:id", updateProject);
 
-// todo: edit portfolio with photo
+// Edit LinkBio With Photo
 router.put("/photo/:id", upload.single("photo"), async (req, res) => {
   const url = req.protocol + "://" + req.get("host");
   const photo = url + "/files/" + req.file.filename;

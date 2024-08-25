@@ -10,19 +10,19 @@ const {
 const Auth = require("../middlewear/requireAuth");
 router.use(Auth);
 
-// todo: get details
+// Get User Details
 router.get("/details/:id", getUser);
 
-// todo: edit username here
- router.post("/username/:id", updateUsername); 
+// Update UserName
+router.post("/username/:id", updateUsername); 
 
-// todo : delete user
+// Delete User
 router.delete("/:id", deleteUser);
 
-// todo: change password
+// Change User Password
 router.post("/passwordchange/:id", changePassword);
 
-// todo: check current pwd
+// Check User Password
 router.post("/password/check/:id", checkPassword);
 
 module.exports = router;
