@@ -82,7 +82,7 @@ const loginUser = async (req, res) => {
 
     const user_id = user._id;
 
-    const portoflio = await Portfolio.findOne({ user_id: user_id });
+    const portfolio = await Portfolio.findOne({ user_id: user_id });
 
     const match = await bcrypt.compare(password, user.password);
 
@@ -91,7 +91,7 @@ const loginUser = async (req, res) => {
     }
     const token = createToken(user._id);
 
-    res.status(200).json({ user, token, portoflio, username: user.username });
+    res.status(200).json({ user, token, portfolio, username: user.username });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
